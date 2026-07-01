@@ -24,3 +24,118 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+@keyframes fly {
+  0% {
+    transform: translateX(-120px) translateY(0) rotate(10deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(120vw) translateY(-120px) rotate(10deg);
+    opacity: 0;
+  }
+}
+html {
+  scroll-behavior: smooth;
+}
+@keyframes flyPlane {
+  0% {
+    transform: translateX(-120px) translateY(0) rotate(10deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120vw) translateY(-160px) rotate(10deg);
+    opacity: 0;
+  }
+}
+.premium-btn {
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s ease;
+}
+
+.premium-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
+  transform: skewX(-20deg);
+}
+
+.premium-btn:hover::before {
+  left: 130%;
+  transition: 0.75s ease;
+}
+
+.premium-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 28px rgba(34, 211, 238, 0.45);
+}
+.aurora-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.aurora-bg::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.18), transparent 30%),
+    radial-gradient(circle at 80% 30%, rgba(59, 130, 246, 0.14), transparent 35%),
+    radial-gradient(circle at 50% 80%, rgba(14, 165, 233, 0.12), transparent 35%);
+  filter: blur(40px);
+  animation: auroraMove 14s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes auroraMove {
+  from {
+    transform: translate3d(-3%, -2%, 0) rotate(0deg);
+  }
+  to {
+    transform: translate3d(3%, 2%, 0) rotate(8deg);
+  }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeUp {
+  opacity: 0;
+  animation: fadeUp 0.9s ease forwards;
+}
+body {
+  font-family: var(--font-jakarta), sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-space), sans-serif;
+}
