@@ -115,7 +115,7 @@ export default function BookingForm() {
           </div>
 
           <a
-            href="https://wa.me/971508564493?text=Hello%20Bakhtar%20Travel,%20I%20want%20to%20search%20a%20flight."
+            href="/flights"
             target="_blank"
             className="flex items-center justify-center gap-3 rounded-2xl bg-emerald-500 p-4 text-lg font-bold text-white shadow-xl transition hover:scale-105 hover:bg-emerald-400"
           >
