@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Clock, Luggage, Plane, ShieldCheck } from "lucide-react";
 
 const flights = [
@@ -48,8 +49,7 @@ export default function FlightsPage() {
             Available Flights
           </h1>
           <p className="mt-4 max-w-2xl text-gray-400">
-            Select your preferred flight and send your booking request to
-            Bakhtar Travel & Tourism.
+            Select your preferred flight and continue to traveler details.
           </p>
         </div>
 
@@ -98,14 +98,13 @@ export default function FlightsPage() {
                     {flight.price}
                   </p>
 
-                  <a
-                    href={`https://wa.me/971508094913?text=Hello%20Bakhtar%20Travel,%20I%20want%20to%20book%20${flight.airline}%20${flight.from}%20to%20${flight.to}%20flight%20at%20${flight.depart}%20price%20${flight.price}`}
-                    target="_blank"
+                  <Link
+                    href="/booking"
                     className="mt-4 flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-5 py-3 font-bold text-white transition hover:bg-emerald-400"
                   >
                     <ShieldCheck size={18} />
                     Book Now
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
