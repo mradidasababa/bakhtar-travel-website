@@ -1,11 +1,51 @@
 "use client";
 
-import { Send, User, Mail, Phone, Plane } from "lucide-react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Send } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 export default function BookingPage() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  const [form, setForm] = useState({
+    full_name: "",
+    phone: "",
+    email: "",
+    nationality: "",
+    passport: "",
+    passengers: "",
+    from_city: "DXB",
+    to_city: "KBL",
+    departure_date: "",
+    return_date: "",
+    airline: "Kam Air",
+    cabin: "Economy",
+  });
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+
+    const { error } = await supabase.from("bookings").insert([form]);
+
+    setLoading(false);
+
+    if (error) {
+      alert("Booking failed: " + error.message);
+      return;
+    }
+
+    router.push("/confirmation");
+  }
+
   return (
     <main className="min-h-screen bg-[#030712] px-4 py-10 text-white sm:px-6">
-      <div className="mx-auto max-w-4xl rounded-[2rem] border border-white/10 bg-white/10 p-6 shadow-2xl backdrop-blur-xl md:p-10">
+      <form
+        onSubmit={handleSubmit}
+        className="mx-auto max-w-4xl rounded-[2rem] border border-white/10 bg-white/10 p-6 shadow-2xl backdrop-blur-xl md:p-10"
+      >
         <p className="text-sm font-bold uppercase tracking-[0.3em] text-emerald-400">
           Booking Request
         </p>
@@ -14,32 +54,30 @@ export default function BookingPage() {
           Traveler Details
         </h1>
 
-        <p className="mt-4 text-gray-400">
-          Fill your details and Bakhtar Travel will contact you for confirmation.
-        </p>
-
         <div className="mt-8 grid gap-4 md:grid-cols-2">
-          <input className="rounded-2xl p-4 text-black" placeholder="Full Name" />
-          <input className="rounded-2xl p-4 text-black" placeholder="Mobile Number" />
-          <input className="rounded-2xl p-4 text-black" placeholder="Email Address" />
-          <input className="rounded-2xl p-4 text-black" placeholder="Nationality" />
-          <input className="rounded-2xl p-4 text-black" placeholder="Passport Number" />
-          <input className="rounded-2xl p-4 text-black" placeholder="Number of Passengers" />
+          {Object.keys(form).map((key) => (
+            <input
+              key={key}
+              required={key !== "return_date"}
+              type={key.includes("date") ? "date" : "text"}
+              value={(form as any)[key]}
+              onChange={(e) =>
+                setForm({ ...form, [key]: e.target.value })
+              }
+              placeholder={key.replace("_", " ").toUpperCase()}
+              className="rounded-2xl p-4 text-black"
+            />
+          ))}
         </div>
 
-        <textarea
-          className="mt-4 min-h-32 w-full rounded-2xl p-4 text-black"
-          placeholder="Write your travel request here..."
-        />
-
-        <a
-          href="/payment"
-          className="mt-6 flex items-center justify-center gap-3 rounded-full bg-emerald-500 px-8 py-4 text-lg font-bold text-white hover:bg-emerald-400"
+        <button
+          disabled={loading}
+          className="mt-6 flex w-full items-center justify-center gap-3 rounded-full bg-emerald-500 px-8 py-4 text-lg font-bold text-white hover:bg-emerald-400 disabled:opacity-60"
         >
           <Send size={20} />
-          Submit Booking Request
-        </a>
-      </div>
+          {loading ? "Saving Booking..." : "Submit Booking Request"}
+        </button>
+      </form>
     </main>
   );
 }
