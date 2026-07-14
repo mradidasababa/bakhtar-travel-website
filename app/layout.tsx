@@ -1,72 +1,57 @@
 import type { Metadata } from "next";
+import { DM_Sans, Manrope } from "next/font/google";
 import "./globals.css";
-import { Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
 
-const jakarta = Plus_Jakarta_Sans({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-jakarta",
+  variable: "--font-dm-sans",
+  display: "swap",
 });
 
-const space = Space_Grotesk({
+const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-space",
+  variable: "--font-manrope",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Bakhtar Travel & Tourism L.L.C | Dubai Travel Agency",
+    default: "Bakhtar Travel & Tourism | Dubai",
     template: "%s | Bakhtar Travel",
   },
   description:
-    "Bakhtar Travel & Tourism L.L.C in Dubai offers flight tickets, hotel booking, UAE visas, Umrah packages and worldwide holiday services.",
+    "Book worldwide flights, UAE visas, worldwide visas, Umrah packages, hotels, airport transfers, holidays and corporate travel services in Dubai.",
   keywords: [
-    "Bakhtar Travel Dubai",
+    "Bakhtar Travel",
     "Dubai travel agency",
-    "UAE visa service",
-    "Dubai tourist visa",
-    "Umrah packages Dubai",
     "flight tickets Dubai",
-    "hotel booking Dubai",
-    "holiday packages Dubai",
+    "UAE visa services",
+    "Umrah packages Dubai",
+    "hotel bookings Dubai",
   ],
-  authors: [{ name: "Bakhtar Travel & Tourism L.L.C" }],
-  creator: "Bakhtar Travel & Tourism L.L.C",
-  publisher: "Bakhtar Travel & Tourism L.L.C",
+  metadataBase: new URL("https://www.bakhtartravels.com"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Bakhtar Travel & Tourism L.L.C | Dubai Travel Agency",
+    title: "Bakhtar Travel & Tourism",
     description:
-      "Flights, hotels, UAE visas, Umrah packages and worldwide holiday services from Dubai.",
-    url: "https://bakhtartravel.ae",
-    siteName: "Bakhtar Travel",
+      "Flights, visas, Umrah, hotels, transfers and worldwide holidays from Dubai.",
+    url: "https://www.bakhtartravels.com",
+    siteName: "Bakhtar Travel & Tourism",
     locale: "en_AE",
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Bakhtar Travel & Tourism L.L.C | Dubai Travel Agency",
-    description:
-      "Flights, hotels, UAE visas, Umrah packages and worldwide holiday services from Dubai.",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
-
-export const viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 5,
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="en-AE">
-      <body className={`${jakarta.variable} ${space.variable}`}>
+    <html lang="en">
+      <body className={`${dmSans.variable} ${manrope.variable}`}>
         {children}
       </body>
     </html>
