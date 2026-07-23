@@ -1,42 +1,56 @@
-import { MetadataRoute } from "next";
+import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = 'https://bakhtartravels.com'
+
   return [
     {
-      url: "https://bakhtartravel.ae",
+      url: `${baseUrl}`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
+      changeFrequency: 'monthly',
+      priority: 1.0,
     },
     {
-      url: "https://bakhtartravel.ae/#about",
+      url: `${baseUrl}/about`,
       lastModified: new Date(),
-      priority: 0.9,
-    },
-    {
-      url: "https://bakhtartravel.ae/#services",
-      lastModified: new Date(),
-      priority: 0.9,
-    },
-    {
-      url: "https://bakhtartravel.ae/#destinations",
-      lastModified: new Date(),
+      changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: "https://bakhtartravel.ae/#umrah",
+      url: `${baseUrl}/flights`,
       lastModified: new Date(),
+      changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: "https://bakhtartravel.ae/#visa",
+      url: `${baseUrl}/hotels`,
       lastModified: new Date(),
+      changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: "https://bakhtartravel.ae/#contact",
+      url: `${baseUrl}/umrah`,
       lastModified: new Date(),
+      changeFrequency: 'weekly',
       priority: 0.9,
     },
-  ];
+    {
+      url: `${baseUrl}/visa`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/payment`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/confirmation`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+  ]
 }
